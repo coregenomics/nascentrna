@@ -1,0 +1,21 @@
+Package: nascentrna
+Title: Classify Nascent RNA Transcripts using Decision Tree
+Version: 0.0.0.9000
+Authors@R:
+    person("Pariksheet", "Nanda",
+           email = "pariksheet.nanda@uconn.edu",
+           role = c("aut", "cre"))
+Description: Uses experimental data of processed transcription start sites
+    (TSSs) and annotated gene regions data to classify gene region by position.
+Depends: R (>= 3.4.1)
+Imports:
+    BiocGenerics,
+    GenomicRanges,
+    IRanges,
+    S4Vectors
+Suggests:
+    testthat
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
