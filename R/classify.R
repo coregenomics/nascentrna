@@ -41,7 +41,7 @@ da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
     ## Input checks.
     if (! isDisjoint(genes)) {
         stop(sQuote("genes"), " has overlapping ranges.",
-             " This will likely craete invalid results.",
+             " This will likely create invalid results.",
              " Please ensure ", sQuote("genes"), " is disjoint.")
     }
     ## More useful error message than downstream complaints of invalid ranges.
@@ -58,7 +58,7 @@ da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
     tss_inv <- invertStrand(tss)
     ol_proximal <- findOverlaps(resize(tss_inv, 0),
                                 look_in,
-                                ## Overlap includes touching eachother.
+                                ## Overlap includes touching each other.
                                 maxgap = 0)
     idx_proximal <- from(ol_proximal)
     dist <- distanceToNearest(tss_inv[idx_proximal],
