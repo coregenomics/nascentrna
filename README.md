@@ -1,5 +1,9 @@
 # nascentrna
 
+[![Build Status](https://api.travis-ci.org/coregenomics/nascentrna.svg)](https://travis-ci.org/coregenomics/nascentrna)
+[![Test Coverage](https://codecov.io/gh/coregenomics/nascentrna/branch/master/graphs/badge.svg)](https://codecov.io/gh/coregenomics/nascentrna)
+[![License: GPL-3+](https://img.shields.io/badge/license-GPL%20(%3E%3D%203)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 The goal of `nascentrna` is to make it easy to narrow in on interesting regions
 of genome activity measured by nascent RNA sequencing
 by classifying these active regions in relation to known, annotated genes
