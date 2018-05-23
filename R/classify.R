@@ -65,8 +65,8 @@ da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
                               resize(look_in, 0))
     ## Match indices of tss input.
     ##
-    ## Using S4Vectors::remapHits() doesn't seem to address this use case.  Will
-    ## discuss with upstream.
+    ## Using S4Vectors::remapHits() (# nolint) doesn't seem to address this use
+    ## case.  Will discuss with upstream.
     dist@from <- idx_proximal[from(dist)]
     dist@nLnode <- length(tss)
     dist

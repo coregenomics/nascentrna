@@ -9,7 +9,7 @@ genes <- GenomicRanges::GRanges(
     gene_id = 1:2)
 tss <- GenomicRanges::GRanges(
     c(
-        ## TSSs related to gene 1 chr:10000-15000+
+        ## TSSs related to gene 1 chr:10000-15000+ (# nolint)
         "chr1:9801-9900:-",             # uaRNA.
         "chr1:9901-10000:-",            # uaRNA overlaps with promoter.
         "chr1:9900-10100:-",            # aRNA overlaps with promoter.
@@ -18,7 +18,7 @@ tss <- GenomicRanges::GRanges(
         "chr1:10101-10300:-",           # daTSS at 100 bp.
         "chr1:10301-10400:-",           # daTSS at 300 bp.
         "chr1:10501-10600:-",           # daRNA at 500 bp.
-        ## TSSs related to gene 2 chr1:30000-40000-
+        ## TSSs related to gene 2 chr1:30000-40000- (# nolint)
         "chr1:29800-30000:-",           # 3' convergent RNA.
         "chr1:40101-40200:+",           # uaRNA.
         "chr1:40001-40100:+",           # uaRNA overlaps with promoter.
@@ -39,7 +39,7 @@ test_that("da_tss returns all valid hits", {
     ## Check distances.
     distance <- rep(c(0L, 100L, 300L), 2)
     expect_equal(mcols(result)$distance, distance)
-    ## Check from-to mapping.
+    ## Check from-to (# nolint) mapping.
     expected <- S4Vectors::Hits(from = idx_da_tss,
                                 to = rep(1:2, each = 3),
                                 nLnode = length(tss),
@@ -51,7 +51,7 @@ test_that("da_tss returns all valid hits", {
 
 test_that("annotate classifies all features", {
     result <- annotate(tss, genes)
-    is_daTSS <- mcols(result)$class %in% "daTSS"
-    expect_equal(sum(is_daTSS), 6)
-    expect_equal(which(is_daTSS), idx_da_tss)
+    is_da_tss <- mcols(result)$class %in% "daTSS"
+    expect_equal(sum(is_da_tss), 6)
+    expect_equal(which(is_da_tss), idx_da_tss)
 })
