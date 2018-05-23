@@ -49,6 +49,21 @@ test_that("da_tss returns all valid hits", {
     expect_equal(expected, result)
 })
 
+test_that("da_tss validates that genes do not overlap", {
+    genes_overlapping <- GenomicRanges::GRanges(
+        c(
+            "chr1:10001-15000:+",
+            "chr1:15000-20000:+",       # Overlaps with gene above.
+            "chr1:30001-40000:-"
+        ),
+        gene_id = 1:3)
+    expect_error(da_tss(tss, genes_overlapping), "overlap")
+})
+
+test_that("da_tss validates min parameter", {
+    expect_error(da_tss(tss, genes, min = 400, max = 300), "min")
+})
+
 test_that("annotate classifies all features", {
     result <- annotate(tss, genes)
     is_da_tss <- mcols(result)$class %in% "daTSS"
