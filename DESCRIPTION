@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"))
 Description: Uses experimental data of processed transcription start sites
     (TSSs) and annotated gene regions data to classify gene region by position.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.4.0)
 Imports:
     BiocGenerics,
     GenomicRanges,
