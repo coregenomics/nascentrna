@@ -67,6 +67,41 @@ da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
          distance = mcols(dist)$distance)
 }
 
+#' \code{ua_rna} tests for upstream-antisense RNA.  The distance at which
+#' neighboring promoters appear is ~300 bp according to Fig 2d in Chen et al
+#' 2016 \url{http://dx.doi.org/10.1038/ng.3616}
+#'
+#' @rdname annotate
+#' @return \code{\link{ua_rna}} returns a Hits object mapping gene with
+#'     downstream-antisense RNA with a column for the tss \code{query} index
+#'     (queryHits), genes \code{subject} index (subjectHits) and the
+#'     \code{distance} between the pair.
+#' @export
+ua_rna <- function(tss, genes, min_start = 0, max_start = 300) {
+    ## Input checks.
+    check_disjoint(genes)
+    ## More useful error message than downstream complaints of invalid ranges.
+    check_lt(min_start, max_start)
+
+    look_in <- promoters(genes, upstream = max_start, downstream = -min_start)
+    ## The distance calculation methods don't have an option to "look on the
+    ## opposite strand", therefore invert the strand as a workaround.
+    tss_inv <- invertStrand(tss)
+    ol_proximal <- findOverlaps(resize(tss_inv, 0, fix = "end"),
+                                look_in,
+                                ## Overlap includes touching each other.
+                                maxgap = 0)
+    idx_proximal <- from(ol_proximal)
+    dist <- distanceToNearest(tss_inv[idx_proximal],
+                              resize(look_in, 0, fix = "end"))
+    ## Match indices of tss input.
+    Hits(from = idx_proximal[from(dist)],
+         to = to(dist),
+         nLnode = length(tss),
+         nRnode = length(genes),
+         distance = mcols(dist)$distance)
+}
+
 #' Object validation for nascentrna package.
 #'
 #' \code{\link{check_disjoint}} throws an error if the input has overlapping

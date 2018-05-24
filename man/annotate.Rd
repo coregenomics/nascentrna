@@ -3,11 +3,14 @@
 \name{annotate}
 \alias{annotate}
 \alias{da_tss}
+\alias{ua_rna}
 \title{Classify all gene positions.}
 \usage{
 annotate(tss, genes)
 
 da_tss(tss, genes, min_start = 0, max_start = 300)
+
+ua_rna(tss, genes, min_start = 0, max_start = 300)
 }
 \arguments{
 \item{tss}{GRanges of experimentally found active gene region start sites to
@@ -31,6 +34,11 @@ annotate returns GRanges of same size as \code{tss} with an
     downstream-antisense TSS with a column for the tss \code{query} index
     (queryHits), genes \code{subject} index (subjectHits) and the
     \code{distance} between the pair.
+
+\code{\link{ua_rna}} returns a Hits object mapping gene with
+    downstream-antisense RNA with a column for the tss \code{query} index
+    (queryHits), genes \code{subject} index (subjectHits) and the
+    \code{distance} between the pair.
 }
 \description{
 \code{\link{annotate}} is a convenience wrapper for running all other
@@ -39,4 +47,8 @@ package vignette for the decision tree used to determine the logical steps of
 classification.
 
 \code{da_tss} tests for downstream-antisense TSS.
+
+\code{ua_rna} tests for upstream-antisense RNA.  The distance at which
+neighboring promoters appear is ~300 bp according to Fig 2d in Chen et al
+2016 \url{http://dx.doi.org/10.1038/ng.3616}
 }

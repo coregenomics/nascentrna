@@ -15,7 +15,7 @@ tss <- GenomicRanges::GRanges(
     c(
         ## TSSs related to gene 1 chr:10000-15000+ (# nolint)
         "chr1:9801-9900:-",             # uaRNA.
-        "chr1:9901-10000:-",            # uaRNA overlaps with promoter.
+        "chr1:9902-10001:-",            # uaRNA overlaps with promoter.
         "chr1:9900-10100:-",            # aRNA overlaps with promoter.
         "chr1:10001-10200:-",           # daTSS that overlaps with promoter.
         "chr1:10101-10300:+",           # Alternative TSS at 100 bp.
@@ -25,7 +25,7 @@ tss <- GenomicRanges::GRanges(
         ## TSSs related to gene 2 chr1:30000-40000- (# nolint)
         "chr1:29800-30000:-",           # 3' convergent RNA.
         "chr1:40101-40200:+",           # uaRNA.
-        "chr1:40001-40100:+",           # uaRNA overlaps with promoter.
+        "chr1:40000-40099:+",           # uaRNA overlaps with promoter.
         "chr1:39901-40100:+",           # aRNA overlaps with promoter.
         "chr1:39801-40000:+",           # daTSS that overlaps with promoter.
         "chr1:39701-39900:-",           # Alternative TSS at 100 bp.
@@ -35,3 +35,6 @@ tss <- GenomicRanges::GRanges(
     ))
 S4Vectors::mcols(tss)$tss_id <- 1:length(tss)
 idx_da_tss <- c(4, 6, 7, 13, 15, 16)
+idx_ua_rna <- c(1, 10)
+dist_da_tss <- rep(c(0L, 100L, 300L), 2)
+dist_ua_rna <- rep(100L, 2)
