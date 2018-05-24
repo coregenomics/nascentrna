@@ -23,6 +23,7 @@ NULL
 #' @return annotate returns GRanges of same size as \code{tss} with an
 #'     additional \code{class} column of best position classification, and
 #'     associated \code{gene} column of the corresponding gene.
+#' @export
 annotate <- function(tss, genes) {
     hits <- da_tss(tss, genes)
     mcols(tss)$class <- NA
@@ -37,6 +38,7 @@ annotate <- function(tss, genes) {
 #'     downstream-antisense TSS with a column for the tss \code{query} index
 #'     (queryHits), genes \code{subject} index (subjectHits) and the
 #'     \code{distance} between the pair.
+#' @export
 da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
     ## Input checks.
     if (! isDisjoint(genes)) {
