@@ -40,12 +40,11 @@ test_that("da_tss returns all valid hits", {
     distance <- rep(c(0L, 100L, 300L), 2)
     expect_equal(mcols(result)$distance, distance)
     ## Check from-to (# nolint) mapping.
-    expected <- S4Vectors::Hits(from = idx_da_tss,
-                                to = rep(1:2, each = 3),
-                                nLnode = length(tss),
-                                nRnode = length(genes),
-                                distance = distance)
-    expected <- as(expected, "SortedByQueryHits")
+    expected <- Hits(from = idx_da_tss,
+                     to = rep(1:2, each = 3),
+                     nLnode = length(tss),
+                     nRnode = length(genes),
+                     distance = distance)
     expect_equal(expected, result)
 })
 

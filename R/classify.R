@@ -2,7 +2,7 @@
 #' @importFrom GenomicRanges distanceToNearest isDisjoint mcols mcols<-
 #'     promoters psetdiff resize
 #' @importFrom IRanges CharacterList findOverlaps
-#' @importFrom S4Vectors from
+#' @importFrom S4Vectors from to Hits
 NULL
 
 #' Classify all gene positions.
@@ -64,10 +64,9 @@ da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
     dist <- distanceToNearest(tss_inv[idx_proximal],
                               resize(look_in, 0))
     ## Match indices of tss input.
-    ##
-    ## Using S4Vectors::remapHits() (# nolint) doesn't seem to address this use
-    ## case.  Will discuss with upstream.
-    dist@from <- idx_proximal[from(dist)]
-    dist@nLnode <- length(tss)
-    dist
+    Hits(from = idx_proximal[from(dist)],
+         to = to(dist),
+         nLnode = length(tss),
+         nRnode = length(genes),
+         distance = mcols(dist)$distance)
 }
