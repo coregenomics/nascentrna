@@ -1,8 +1,8 @@
 #' @importFrom BiocGenerics invertStrand
-#' @importFrom GenomicRanges distanceToNearest isDisjoint mcols mcols<-
-#'     promoters psetdiff resize
+#' @importFrom GenomicRanges distanceToNearest isDisjoint promoters psetdiff
+#'     resize
 #' @importFrom IRanges CharacterList findOverlaps
-#' @importFrom S4Vectors from to Hits
+#' @importFrom S4Vectors from to Hits mcols mcols<-
 NULL
 
 #' Classify all gene positions.

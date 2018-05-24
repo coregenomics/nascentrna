@@ -33,5 +33,5 @@ tss <- GenomicRanges::GRanges(
         "chr1:39601-39700:+",           # daTSS at 300 bp.
         "chr1:39401-39500:+"            # daRNA at 500 bp.
     ))
-mcols(tss)$tss_id <- 1:length(tss)
+S4Vectors::mcols(tss)$tss_id <- 1:length(tss)
 idx_da_tss <- c(4, 6, 7, 13, 15, 16)
