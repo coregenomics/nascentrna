@@ -41,15 +41,9 @@ annotate <- function(tss, genes) {
 #' @export
 da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
     ## Input checks.
-    if (! isDisjoint(genes)) {
-        stop(sQuote("genes"), " has overlapping ranges.",
-             " This will likely create invalid results.",
-             " Please ensure ", sQuote("genes"), " is disjoint.")
-    }
+    check_disjoint(genes)
     ## More useful error message than downstream complaints of invalid ranges.
-    if (min_start >= max_start) {
-        stop(sQuote("min_start"), " must be less than ", sQuote("max_start"))
-    }
+    check_lt(min_start, max_start)
 
     look_in <- promoters(genes, downstream = max_start)
     look_in <- psetdiff(
@@ -71,4 +65,40 @@ da_tss <- function(tss, genes, min_start = 0, max_start = 300) {
          nLnode = length(tss),
          nRnode = length(genes),
          distance = mcols(dist)$distance)
+}
+
+#' Object validation for nascentrna package.
+#'
+#' \code{\link{check_disjoint}} throws an error if the input has overlapping
+#' regions.
+#'
+#' @rdname validation
+#' @param gr GRanges object to validate.
+#' @return \code{\link{check_disjoint}} invisibly returns TRUE if the input is
+#'     disjoint.
+check_disjoint <- function(gr) {
+    if (! isDisjoint(gr)) {
+        obj <- sQuote(substitute(gr))
+        stop(obj, " has overlapping ranges.",
+             " This will likely create invalid results.",
+             " Please ensure ", obj, " is disjoint.")
+    }
+    invisible(TRUE)
+}
+
+#' \code{\link{check_lt}} throws an error if the \code{lesser} argument is equal
+#' to or exceeds the \code{greater} argument.
+#'
+#' @rdname validation
+#' @param lesser Numeric value that should be less than \code{greater}.
+#' @param greater Numeric value used to validate \code{lesser}.
+#' @return \code{\link{check_lt}} invisibly returns TRUE if \code{lesser} is
+#'     strictly less than \code{greater}
+check_lt <- function(lesser, greater) {
+    if (lesser >= greater) {
+        obj_lesser <- sQuote(substitute(lesser))
+        obj_greater <- sQuote(substitute(greater))
+        stop(obj_lesser, " must be less than ", obj_greater)
+    }
+    invisible(TRUE)
 }
