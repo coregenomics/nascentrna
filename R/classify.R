@@ -20,9 +20,9 @@ NULL
 #'     feature.
 #' @param max_start Maximum integer distance away from gene start to find
 #'     feature.
-#' @return annotate returns GRanges of same size as \code{tss} with an
-#'     additional \code{class} column of best position classification, and
-#'     associated \code{gene} column of the corresponding gene.
+#' @return \code{\link{annotate}} returns GRanges of same size as \code{tss}
+#'     with an additional \code{class} column of best position classification,
+#'     and associated \code{gene} column of the corresponding gene.
 #' @export
 annotate <- function(tss, genes) {
     hits <- da_tss(tss, genes)

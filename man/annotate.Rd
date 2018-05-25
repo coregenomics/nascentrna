@@ -26,9 +26,9 @@ feature.}
 feature.}
 }
 \value{
-annotate returns GRanges of same size as \code{tss} with an
-    additional \code{class} column of best position classification, and
-    associated \code{gene} column of the corresponding gene.
+\code{\link{annotate}} returns GRanges of same size as \code{tss}
+    with an additional \code{class} column of best position classification,
+    and associated \code{gene} column of the corresponding gene.
 
 \code{\link{da_tss}} returns a Hits object mapping gene with
     downstream-antisense TSS with a column for the tss \code{query} index
