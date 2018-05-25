@@ -1,3 +1,14 @@
+tre <- GenomicRanges::GRanges(
+    c(
+        "chr1:5001-5500:*",             # Enhancer
+        "chr1:9900-10100:*",            # Partially overlaps gene 1
+        "chr1:10101-10300:*",           # Overlaps gene 1
+        "chr1:25001-25500:*",           # Enhancer
+        "chr1:39901-40100:*",           # Partially overlaps gene 2
+        "chr1:39701-39900:*"            # Overlaps gene 2
+    ),
+    tre_id = 1:6
+    )
 genes_overlapping <- GenomicRanges::GRanges(
     c(
         "chr1:10001-15000:+",
@@ -36,5 +47,6 @@ tss <- GenomicRanges::GRanges(
 S4Vectors::mcols(tss)$tss_id <- 1:length(tss)
 idx_da_tss <- c(4, 6, 7, 13, 15, 16)
 idx_ua_rna <- c(1, 10)
+idx_enhancer <- c(1, 4)
 dist_da_tss <- rep(c(0L, 100L, 300L), 2)
 dist_ua_rna <- rep(100L, 2)

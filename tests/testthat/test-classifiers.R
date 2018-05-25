@@ -38,6 +38,19 @@ test_that("ua_rna returns all valid hits", {
     expect_equal(expected, result)
 })
 
+test_that("enhancer validates tre strandedness", {
+    BiocGenerics::strand(tre[2]) <- "-"
+    expect_error(enhancer(tre, genes), "strand")
+    BiocGenerics::strand(tre[2]) <- "+"
+    expect_error(enhancer(tre, genes), "strand")
+})
+
+test_that("enhancer subsets valid GRanges", {
+    result <- enhancer(tre, genes)
+    expected <- tre[idx_enhancer]
+    expect_equal(expected, result)
+})
+
 test_that("annotate classifies all features", {
     result <- annotate(tss, genes)
     is_da_tss <- mcols(result)$class %in% "daTSS"

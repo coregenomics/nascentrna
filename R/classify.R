@@ -1,7 +1,7 @@
-#' @importFrom BiocGenerics invertStrand
+#' @importFrom BiocGenerics invertStrand strand
 #' @importFrom GenomicRanges distanceToNearest isDisjoint promoters psetdiff
 #'     resize
-#' @importFrom IRanges CharacterList findOverlaps
+#' @importFrom IRanges CharacterList findOverlaps %outside%
 #' @importFrom S4Vectors from to Hits mcols mcols<-
 NULL
 
@@ -100,6 +100,25 @@ ua_rna <- function(tss, genes, min_start = 0, max_start = 300) {
          nLnode = length(tss),
          nRnode = length(genes),
          distance = mcols(dist)$distance)
+}
+
+#' \code{enhancer} tests for transcription regulatory elements outside of
+#' annotated genes.
+#'
+#' @rdname annotate
+#' @param tre GRanges of experimentally found active putative transcription
+#'     regulatory regions to be classified.
+#' @return \code{\link{enhancer}} subsets \code{tre} to values outside genes.
+#' @export
+enhancer <- function(tre, genes) {
+    ## Input checks.
+    check_disjoint(genes)
+    if (! all(strand(tre) == "*")) {
+        stop("All ", sQuote("tre"),
+             " candidate enhancers values must be unstranded.")
+    }
+
+    tre[tre %outside% genes]
 }
 
 #' Object validation for nascentrna package.
